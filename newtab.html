@@ -13,14 +13,34 @@
 
         <div class="toolbar">
           <label class="search-box" for="searchInput">
-            <span class="search-icon" aria-hidden="true">?</span>
+            <span class="search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z"></path></svg>
+            </span>
             <input id="searchInput" type="search" placeholder="Search bookmarks" autocomplete="off">
           </label>
-          <button class="icon-button" id="addGroupBtn" type="button" title="Add group" aria-label="Add group">+</button>
-          <button class="icon-button" id="renameGroupBtn" type="button" title="Rename active group" aria-label="Rename active group">E</button>
-          <button class="icon-button danger" id="deleteGroupBtn" type="button" title="Delete active group" aria-label="Delete active group">x</button>
-          <button class="text-button" id="exportBtn" type="button">Export</button>
-          <button class="text-button" id="importBtn" type="button">Import</button>
+          <button class="icon-button" id="addBookmarkBtn" type="button" title="Add bookmark" aria-label="Add bookmark" data-tooltip="Add bookmark">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+          <button class="icon-button" id="groupSettingsBtn" type="button" title="Group settings" aria-label="Open group settings" data-tooltip="Group settings">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 7h16M7 12h10M10 17h4"></path></svg>
+          </button>
+          <div class="custom-select" id="tileSizeDropdown">
+            <span>Tiles</span>
+            <button class="custom-select-toggle" id="tileSizeToggle" type="button" aria-label="Tile size" aria-haspopup="listbox" aria-expanded="false" data-tooltip="Tile size">
+              <span id="tileSizeValue">Medium</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"></path></svg>
+            </button>
+            <div class="custom-select-menu" id="tileSizeOptions" role="listbox" aria-label="Tile size">
+              <button type="button" role="option" data-tile-size="small">Small</button>
+              <button type="button" role="option" data-tile-size="medium">Medium</button>
+              <button type="button" role="option" data-tile-size="large">Large</button>
+            </div>
+          </div>
+          <button class="icon-button" id="settingsBtn" type="button" title="Settings" aria-label="Settings" data-tooltip="Settings">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"></path><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 0 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1A2 2 0 0 1 4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.3 7A2 2 0 0 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3h.1a1.7 1.7 0 0 0 1-1.6V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.6h.1a1.7 1.7 0 0 0 1.9-.3l.1-.1A2 2 0 0 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1h.1a2 2 0 0 1 0 4H21a1.7 1.7 0 0 0-1.6 1Z"></path></svg>
+          </button>
+          <button class="text-button" id="exportBtn" type="button" aria-label="Export JSON" data-tooltip="Export">Export</button>
+          <button class="text-button" id="importBtn" type="button" aria-label="Import JSON" data-tooltip="Import">Import</button>
           <input class="hidden-file" id="importFile" type="file" accept="application/json,.json">
         </div>
       </header>
@@ -31,7 +51,6 @@
             <p class="eyebrow" id="groupCount">0 bookmarks</p>
             <h1 id="activeGroupTitle">Speed Dial</h1>
           </div>
-          <button class="primary-button" id="addBookmarkBtn" type="button">Add bookmark</button>
         </section>
 
         <section class="dial-grid" id="bookmarkGrid" aria-live="polite"></section>
@@ -41,6 +60,9 @@
 
     <dialog class="modal" id="groupDialog">
       <form method="dialog" class="modal-card" id="groupForm">
+        <button class="modal-close" type="button" aria-label="Close dialog" data-dialog-close data-tooltip="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
         <h2 id="groupDialogTitle">Group</h2>
         <label>
           <span>Name</span>
@@ -55,6 +77,9 @@
 
     <dialog class="modal" id="bookmarkDialog">
       <form method="dialog" class="modal-card" id="bookmarkForm">
+        <button class="modal-close" type="button" aria-label="Close dialog" data-dialog-close data-tooltip="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
         <h2 id="bookmarkDialogTitle">Bookmark</h2>
         <label>
           <span>Title</span>
@@ -64,6 +89,33 @@
           <span>URL</span>
           <input id="bookmarkUrlInput" type="text" inputmode="url" placeholder="https://example.com" required>
         </label>
+        <section class="modal-section icon-section">
+          <h3>Icon</h3>
+          <div class="segmented-control icon-source-control" role="tablist" aria-label="Bookmark icon source">
+            <button class="segment-button" type="button" data-icon-source="auto" role="tab" aria-selected="true">Auto</button>
+            <button class="segment-button" type="button" data-icon-source="url" role="tab" aria-selected="false">URL</button>
+            <button class="segment-button" type="button" data-icon-source="upload" role="tab" aria-selected="false">Upload</button>
+            <button class="segment-button" type="button" data-icon-source="none" role="tab" aria-selected="false">None</button>
+          </div>
+          <div class="bookmark-icon-editor">
+            <div class="bookmark-icon-preview" id="bookmarkIconPreview" aria-hidden="true"></div>
+            <div class="bookmark-icon-fields">
+              <label class="icon-url-panel" id="iconUrlPanel" hidden>
+                <span>Icon image URL</span>
+                <input id="bookmarkIconUrlInput" type="text" inputmode="url" placeholder="https://example.com/icon.png">
+              </label>
+              <div class="icon-upload-panel" id="iconUploadPanel" hidden>
+                <input class="hidden-file" id="bookmarkIconFileInput" type="file" accept="image/*">
+                <div class="upload-row">
+                  <button class="text-button" id="chooseBookmarkIconBtn" type="button">Choose image</button>
+                  <span class="upload-file-name" id="bookmarkIconFileName">No image selected</span>
+                </div>
+              </div>
+              <p class="settings-note">Uploaded local bookmark icons are stored in this browser and are not included in JSON export.</p>
+              <button class="text-button" id="removeBookmarkIconBtn" type="button">Remove custom icon</button>
+            </div>
+          </div>
+        </section>
         <div class="modal-actions">
           <button class="text-button" value="cancel" type="button" data-dialog-close>Cancel</button>
           <button class="primary-button" value="default" type="submit">Save</button>
@@ -71,6 +123,95 @@
       </form>
     </dialog>
 
+    <dialog class="modal" id="groupSettingsDialog">
+      <form method="dialog" class="modal-card" id="groupSettingsForm">
+        <button class="modal-close" type="button" aria-label="Close dialog" data-dialog-close data-tooltip="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+        <h2>Group settings</h2>
+        <p class="modal-subtitle" id="groupSettingsSubtitle">Current group</p>
+        <section class="modal-section">
+          <h3>General</h3>
+          <label>
+            <span>Group name</span>
+            <input id="groupSettingsNameInput" type="text" maxlength="32" required>
+          </label>
+          <div class="section-actions">
+            <button class="primary-button" id="renameGroupConfirmBtn" type="button">Rename group</button>
+            <button class="text-button" id="addGroupBtn" type="button">Add group</button>
+          </div>
+        </section>
+        <section class="modal-section danger-zone">
+          <h3>Danger zone</h3>
+          <p>This removes the active group and all bookmarks inside it.</p>
+          <div class="delete-confirm" id="deleteGroupConfirmPanel" hidden>
+            <p>Delete this group permanently?</p>
+            <div class="section-actions">
+              <button class="danger-button" id="deleteGroupConfirmBtn" type="button">Confirm delete</button>
+              <button class="text-button" id="deleteGroupCancelBtn" type="button">Cancel</button>
+            </div>
+          </div>
+          <button class="danger-button" id="deleteGroupRequestBtn" type="button">Delete group</button>
+        </section>
+        <div class="modal-actions">
+          <button class="text-button" value="cancel" type="button" data-dialog-close>Close</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="settingsDialog">
+      <form method="dialog" class="modal-card" id="settingsForm">
+        <button class="modal-close" type="button" aria-label="Close dialog" data-dialog-close data-tooltip="Close">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+        <h2>Settings</h2>
+        <p class="modal-subtitle">Application preferences</p>
+        <section class="modal-section">
+          <h3>Background</h3>
+          <div class="segmented-control" role="tablist" aria-label="Background source">
+            <button class="segment-button" id="backgroundSourceUrlBtn" type="button" data-background-source="url" role="tab" aria-selected="true">URL</button>
+            <button class="segment-button" id="backgroundSourceUploadBtn" type="button" data-background-source="upload" role="tab" aria-selected="false">Upload from device</button>
+          </div>
+          <div class="background-panel" id="backgroundUrlPanel">
+            <label>
+              <span>Background image URL</span>
+              <input id="backgroundUrlInput" type="text" inputmode="url" placeholder="https://example.com/background.jpg">
+            </label>
+          </div>
+          <div class="background-panel" id="backgroundUploadPanel" hidden>
+            <input class="hidden-file" id="backgroundFileInput" type="file" accept="image/*">
+            <div class="upload-row">
+              <button class="text-button" id="chooseBackgroundBtn" type="button">Choose image</button>
+              <span class="upload-file-name" id="uploadedBackgroundName">No image selected</span>
+            </div>
+            <div class="background-preview" id="backgroundPreview" hidden></div>
+            <p class="settings-note">Uploaded local backgrounds and bookmark icons are stored in this browser and are not included in JSON export.</p>
+            <div class="section-actions">
+              <button class="text-button" id="removeUploadedBackgroundBtn" type="button">Remove uploaded background</button>
+            </div>
+          </div>
+          <div class="section-actions">
+            <button class="text-button" id="resetBackgroundBtn" type="button">Reset to default background</button>
+          </div>
+        </section>
+        <section class="modal-section">
+          <h3>Behavior</h3>
+          <label class="toggle-row">
+            <input id="openInNewTabInput" type="checkbox">
+            <span>
+              Open bookmarks in new tab
+              <small>When enabled, bookmark cards open links in a new browser tab.</small>
+            </span>
+          </label>
+        </section>
+        <div class="modal-actions">
+          <button class="text-button" value="cancel" type="button" data-dialog-close>Close</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="floating-tooltip" id="floatingTooltip" role="tooltip" hidden></div>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
     <script src="app.js"></script>
   </body>
 </html>
