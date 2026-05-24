@@ -1,0 +1,404 @@
+:root {
+  color-scheme: dark;
+  --bg: #06070b;
+  --panel: rgba(17, 20, 30, 0.68);
+  --panel-strong: rgba(23, 27, 39, 0.86);
+  --border: rgba(255, 255, 255, 0.12);
+  --text: #f4f7fb;
+  --muted: #9ca7ba;
+  --accent: #66d9e8;
+  --accent-strong: #8ce99a;
+  --danger: #ff6b6b;
+  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    linear-gradient(rgba(5, 7, 12, 0.52), rgba(5, 7, 12, 0.76)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1800' height='1200' viewBox='0 0 1800 1200'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop stop-color='%231e293b'/%3E%3Cstop offset='.45' stop-color='%230f172a'/%3E%3Cstop offset='1' stop-color='%23010b13'/%3E%3C/linearGradient%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .018' numOctaves='4' seed='12'/%3E%3CfeColorMatrix values='.22 0 0 0 0 0 .28 0 0 0 0 0 .38 0 0 0 0 0 .72 0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='1800' height='1200' fill='url(%23g)'/%3E%3Cpath d='M0 850 C240 720 380 910 610 760 C810 630 950 640 1120 520 C1360 350 1550 420 1800 250 L1800 1200 L0 1200 Z' fill='%23071d2a' opacity='.74'/%3E%3Cpath d='M0 250 C260 170 420 290 620 210 C820 130 970 210 1180 120 C1410 22 1620 70 1800 0 L1800 1200 L0 1200 Z' filter='url(%23n)' opacity='.72'/%3E%3C/svg%3E")
+    center / cover fixed;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+  padding: 24px;
+  backdrop-filter: blur(1px);
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  position: sticky;
+  top: 16px;
+  z-index: 5;
+}
+
+.group-tabs,
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(8, 11, 18, 0.56);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.group-tabs {
+  max-width: min(760px, 100%);
+  overflow-x: auto;
+}
+
+.group-tab,
+.text-button,
+.primary-button,
+.icon-button {
+  min-height: 40px;
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.group-tab {
+  padding: 0 16px;
+  white-space: nowrap;
+}
+
+.group-tab.active {
+  color: #061016;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 10px 30px rgba(102, 217, 232, 0.24);
+}
+
+.group-tab:hover,
+.text-button:hover,
+.primary-button:hover,
+.icon-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: min(280px, 30vw);
+  min-width: 190px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.search-icon {
+  color: var(--muted);
+}
+
+.search-box input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--text);
+  background: transparent;
+}
+
+.search-box input::placeholder {
+  color: var(--muted);
+}
+
+.icon-button {
+  width: 40px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.icon-button.danger:hover {
+  color: white;
+  background: rgba(255, 107, 107, 0.28);
+}
+
+.text-button,
+.primary-button {
+  padding: 0 16px;
+}
+
+.primary-button {
+  color: #061016;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+}
+
+.content {
+  width: min(1320px, 100%);
+  margin: 72px auto 0;
+}
+
+.hero {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0;
+  font-size: 72px;
+  line-height: 0.94;
+}
+
+.dial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 18px;
+}
+
+.bookmark-card {
+  position: relative;
+  min-height: 142px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: none;
+  background: var(--panel);
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(18px);
+  overflow: hidden;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.bookmark-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(102, 217, 232, 0.16), transparent 48%, rgba(140, 233, 154, 0.12));
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.bookmark-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(102, 217, 232, 0.44);
+  background: var(--panel-strong);
+  box-shadow: 0 22px 80px rgba(0, 0, 0, 0.34);
+}
+
+.bookmark-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.bookmark-card:hover::before {
+  opacity: 1;
+}
+
+.bookmark-card.dragging {
+  opacity: 0.52;
+  transform: scale(0.98);
+}
+
+.bookmark-card.drop-target {
+  border-color: var(--accent-strong);
+}
+
+.bookmark-main,
+.bookmark-actions {
+  position: relative;
+  z-index: 1;
+}
+
+.bookmark-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #061016;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+}
+
+.bookmark-title {
+  margin: 16px 0 7px;
+  overflow-wrap: anywhere;
+  font-size: 18px;
+  font-weight: 750;
+}
+
+.bookmark-url {
+  color: var(--muted);
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bookmark-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.bookmark-card:hover .bookmark-actions,
+.bookmark-card:focus-within .bookmark-actions {
+  opacity: 1;
+}
+
+.card-action {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.card-action:hover {
+  background: rgba(255, 255, 255, 0.19);
+}
+
+.empty-state {
+  margin: 48px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  text-align: center;
+}
+
+.hidden-file {
+  display: none;
+}
+
+.modal {
+  width: min(440px, calc(100vw - 32px));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(13, 16, 25, 0.92);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(24px);
+}
+
+.modal::backdrop {
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+.modal-card {
+  display: grid;
+  gap: 16px;
+}
+
+.modal-card h2 {
+  margin: 0 0 6px;
+}
+
+.modal-card label {
+  display: grid;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.modal-card input {
+  width: 100%;
+  height: 46px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 14px;
+  outline: 0;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.modal-card input:focus {
+  border-color: rgba(102, 217, 232, 0.64);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@media (max-width: 860px) {
+  .app-shell {
+    padding: 16px;
+  }
+
+  .topbar {
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar,
+  .group-tabs {
+    overflow-x: auto;
+  }
+
+  .search-box {
+    flex: 1 0 210px;
+    width: auto;
+  }
+
+  .content {
+    margin-top: 40px;
+  }
+
+  .hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .dial-grid {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 14px;
+  }
+}

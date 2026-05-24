@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Speed Dial</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <nav class="group-tabs" id="groupTabs" aria-label="Bookmark groups"></nav>
+
+        <div class="toolbar">
+          <label class="search-box" for="searchInput">
+            <span class="search-icon" aria-hidden="true">?</span>
+            <input id="searchInput" type="search" placeholder="Search bookmarks" autocomplete="off">
+          </label>
+          <button class="icon-button" id="addGroupBtn" type="button" title="Add group" aria-label="Add group">+</button>
+          <button class="icon-button" id="renameGroupBtn" type="button" title="Rename active group" aria-label="Rename active group">E</button>
+          <button class="icon-button danger" id="deleteGroupBtn" type="button" title="Delete active group" aria-label="Delete active group">x</button>
+          <button class="text-button" id="exportBtn" type="button">Export</button>
+          <button class="text-button" id="importBtn" type="button">Import</button>
+          <input class="hidden-file" id="importFile" type="file" accept="application/json,.json">
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="hero">
+          <div>
+            <p class="eyebrow" id="groupCount">0 bookmarks</p>
+            <h1 id="activeGroupTitle">Speed Dial</h1>
+          </div>
+          <button class="primary-button" id="addBookmarkBtn" type="button">Add bookmark</button>
+        </section>
+
+        <section class="dial-grid" id="bookmarkGrid" aria-live="polite"></section>
+        <p class="empty-state" id="emptyState" hidden>No bookmarks found.</p>
+      </main>
+    </div>
+
+    <dialog class="modal" id="groupDialog">
+      <form method="dialog" class="modal-card" id="groupForm">
+        <h2 id="groupDialogTitle">Group</h2>
+        <label>
+          <span>Name</span>
+          <input id="groupNameInput" type="text" maxlength="32" required>
+        </label>
+        <div class="modal-actions">
+          <button class="text-button" value="cancel" type="button" data-dialog-close>Cancel</button>
+          <button class="primary-button" value="default" type="submit">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal" id="bookmarkDialog">
+      <form method="dialog" class="modal-card" id="bookmarkForm">
+        <h2 id="bookmarkDialogTitle">Bookmark</h2>
+        <label>
+          <span>Title</span>
+          <input id="bookmarkTitleInput" type="text" maxlength="60" required>
+        </label>
+        <label>
+          <span>URL</span>
+          <input id="bookmarkUrlInput" type="text" inputmode="url" placeholder="https://example.com" required>
+        </label>
+        <div class="modal-actions">
+          <button class="text-button" value="cancel" type="button" data-dialog-close>Cancel</button>
+          <button class="primary-button" value="default" type="submit">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
